@@ -18,7 +18,7 @@
 >若显示无法修改此文件，则需要修改mysql-5.6.30-win64权限。
 
  - 修改方法：  
-   右键选择安装目录属性->安全，选择Users，编辑并修改权限。
+   右键选择安装目录属性->安全，选择Users，编辑并修改权限。  
 ###2.安装并启动mysql服务
 - 打开命令提示符：   
 `cd 磁盘:/文件名/.../mysql-5.6.30-win64/bin`  
@@ -36,7 +36,7 @@
 `mysql -u root`  
 `mysql>update user set password=password('yournewpassword') where user='root';`  
 `mysql>flush privileges;`  
-再`mysql -u root -p`并输入密码即可.
+再`mysql -u root -p`并输入密码即可.  
 >若修改密码后登陆root用户出现Error 1045:Access Denied for user 'root'@'localhost',则需要重新设置密码。  
   
 -  设置方法：  
