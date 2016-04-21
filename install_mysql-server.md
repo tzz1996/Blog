@@ -12,7 +12,10 @@
 `datadir = 磁盘:/文件名/.../mysql-5.6.30-win64/data`
 `port = 3306  `  
 `[client]  `  
-`loose-default-character-set = utf8  `
+`loose-default-character-set = utf8  `  
+`[mysqld]`  
+`character-set-server = utf8`  
+
 
 >注意:
 >若显示无法修改此文件，则需要修改mysql-5.6.30-win64权限。
