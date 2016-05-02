@@ -38,8 +38,8 @@
   2.输入service.msc打开服务管理设置.  
   3.启动mysql服务.
 - 登陆root用户并修改密码(命令行)：  
-`mysql -u root` 
-`mysql>use mysql`  
+`mysql -u root`   
+`mysql>use mysql;`     
 `mysql>update user set password=password('yournewpassword') where user='root';`  
 `mysql>flush privileges;`  
 再`mysql -u root -p`并输入密码即可.  
