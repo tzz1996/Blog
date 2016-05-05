@@ -59,7 +59,9 @@
 `net stop mysql`  
 `net start mysql`  
 5.重新登陆mysql即可：  
-`mysql -u root -p`
+`mysql -u root -p`  
+
+>可将 '磁盘:/文件名/.../mysql-5.6.30-win64/bin' 添加到系统环境变量'Path'中，即可在任意路径下登陆mysql。
 
 **至此，windows下mysql-server配置完成.**
     
