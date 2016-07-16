@@ -35,7 +35,7 @@
 `net start mysql`    (停止服务命令：`net stop mysql`)  
  - 图形界面方法：  
   1.开始菜单->运行.  
-  2.输入service.msc打开服务管理设置.  
+  2.输入services.msc打开服务管理设置.  
   3.启动mysql服务.
 - 登陆root用户并修改密码(命令行)：  
 `mysql -u root`   
