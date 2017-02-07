@@ -47,9 +47,9 @@ mysql>flush privileges;
 
 
 ###3.issues
->若修改密码后登陆root用户出现Error 1045:Access Denied for user 'root'@'localhost',则需要重新设置密码。  
+- 若修改密码后登陆root用户出现Error 1045:Access Denied for user 'root'@'localhost',则需要重新设置密码。  
   
--  设置方法：  
+ - 设置方法：  
 1.修改安装目录的my-default.ini文件(添加)：  
 `[mysqld]`  
 `skip-grant-tables`  
@@ -64,11 +64,11 @@ mysql>flush privileges;
 5.重新登陆mysql即可：  
 `mysql -u root -p`  
 
->若用新建用户登录出现Error 1045 (28000):Access Denied for user 'yourusername'@'localhost' (using password: YES).
+- 若用新建用户登录出现Error 1045 (28000):Access Denied for user 'yourusername'@'localhost' (using password: YES).
 
-- 解决办法：需用root用户登录，删除mysql数据库中user表里的host=''@'localhost'的用户([具体原因](http://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw))
+ - 解决办法：需用root用户登录，删除mysql数据库中user表里的host=''@'localhost'的用户([具体原因](http://stackoverflow.com/questions/10299148/mysql-error-1045-28000-access-denied-for-user-billlocalhost-using-passw))
 
->可将 '磁盘:/文件名/.../mysql-5.6.30-win64/bin' 添加到系统环境变量'Path'中，即可在任意路径下登陆mysql。
+- 可将 '磁盘:/文件名/.../mysql-5.6.30-win64/bin' 添加到系统环境变量'Path'中，即可在任意路径下登陆mysql。
 
 **至此，windows下mysql-server配置完成.**
     
