@@ -24,7 +24,7 @@ default-character-set = utf8
 
 
 ###2.安装并启动mysql服务
-- 打开命令提示符(admin):  
+- 打开命令提示符(admin):    
 `cd 磁盘:/文件名/.../mysql-5.6.30-win64/bin`  
 `mysqld -install`  
  - 若mysql安装成功，则显示：  
