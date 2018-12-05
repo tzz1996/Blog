@@ -1,9 +1,9 @@
-#Windows下配置mysql-server-5.6
+# Windows下配置mysql-server-5.6
 - 下载[mysql-server](http://dev.mysql.com/downloads/mysql/5.6.html#downloads)
 
-##**安装步骤:**
+## **安装步骤:**
 
-###1. 配置my-default.ini文件
+### 1. 配置my-default.ini文件
 
 - 添加以下内容： 
 ```
@@ -23,7 +23,7 @@ default-character-set = utf8
    右键选择安装目录属性->安全，选择Users，编辑并修改权限。  
 
 
-###2.安装并启动mysql服务
+### 2.安装并启动mysql服务
 - 打开命令提示符(admin):    
 `cd 磁盘:/文件名/.../mysql-5.6.30-win64/bin`  
 `mysqld -install`  
@@ -46,7 +46,7 @@ mysql>flush privileges;
 再`mysql -u root -p`并输入密码即可.  
 
 
-###3.issues
+### 3.issues
 - 若修改密码后登陆root用户出现Error 1045:Access Denied for user 'root'@'localhost',则需要重新设置密码。  
   
  - 设置方法：  
