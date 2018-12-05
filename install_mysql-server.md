@@ -7,12 +7,12 @@
 
 - 添加以下内容： 
 ```
-[mysqld] 
-character-set-server = utf8
-basedir = 磁盘:/文件名/.../mysql-5.6.30-win64    
-datadir = 磁盘:/文件名/.../mysql-5.6.30-win64/data
-port = 3306   
-[client]   
+[mysqld]    
+character-set-server = utf8		
+basedir = 磁盘:/文件名/.../mysql-5.6.30-win64		      
+datadir = 磁盘:/文件名/.../mysql-5.6.30-win64/data	  
+port = 3306		
+[client]	
 default-character-set = utf8    
 ```
 - 配置完成后将文件改名为my.ini。
