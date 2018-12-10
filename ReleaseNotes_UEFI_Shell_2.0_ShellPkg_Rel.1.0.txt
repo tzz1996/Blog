@@ -1,0 +1,70 @@
+============================================================================
+                                 OVERVIEW
+============================================================================
+The UEFI 2.0 shell provides a standard pre-boot command line processor.
+It is similar to the EDK EFI Shell or a *nix command line parser.
+
+============================================================================
+                    HOW TO INCORPORATE THIS SHELL INTO NT32
+============================================================================
+The instructions below are included as a sample and template on how a 
+developer may integrate this code into an existing platform:
+
+1. Add this shell build to the build:
+   Add the shell.inf to the [components] section as it is in the ShellPkg.dsc.
+   EXAMPLE: to add the shell to Nt32 emulation, edit file Nt32Pkg.dsc add the following .inf 
+                to the [Components...] section and before the [BuildOptions] Section
+_______
+  ShellPkg/Application/Shell/Shell.inf {
+    <LibraryClasses>
+      DebugLib|MdePkg/Library/UefiDebugLibConOut/UefiDebugLibConOut.inf
+      ShellCommandLib|ShellPkg/Library/UefiShellCommandLib/UefiShellCommandLib.inf
+      NULL|ShellPkg/Library/UefiShellLevel2CommandsLib/UefiShellLevel2CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellLevel1CommandsLib/UefiShellLevel1CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellLevel3CommandsLib/UefiShellLevel3CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellDriver1CommandsLib/UefiShellDriver1CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellInstall1CommandsLib/UefiShellInstall1CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellDebug1CommandsLib/UefiShellDebug1CommandsLib.inf
+      NULL|ShellPkg/Library/UefiShellNetwork1CommandsLib/UefiShellNetwork1CommandsLib.inf
+      HandleParsingLib|ShellPkg/Library/UefiHandleParsingLib/UefiHandleParsingLib.inf
+      FileHandleLib|ShellPkg/Library/UefiFileHandleLib/UefiFileHandleLib.inf
+      ShellLib|ShellPkg/Library/UefiShellLib/UefiShellLib.inf
+      SortLib|ShellPkg/Library/UefiSortLib/UefiSortLib.inf
+      PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
+
+    <PcdsFixedAtBuild>
+      gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask|0xFF
+      gEfiShellPkgTokenSpaceGuid.PcdShellLibAutoInitialize|FALSE
+      gEfiMdePkgTokenSpaceGuid.PcdUefiLibMaxPrintBufferSize|16000
+  }
+_________
+
+2. Update system PCDs in the .dsc file  to support this new module
+   Update the PCD as follows using the Shell's PCD:
+   EXAMPLE: to add the shell to Nt32 emulation, edit file Nt32Pkg.dsc add the following to the [PcdsFixedAtBuild] section
+   gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile|{ 0x83, 0xA5, 0x04, 0x7C, 0x3E, 0x9E, 0x1C, 0x4F, 0xAD, 0x65, 0xE0, 0x52, 0x68, 0xD0, 0xB4, 0xD1 }
+
+3. Remove the old shell from the Firmware list .fdf file.
+   Remove the FILE APPLICATION section for the old shell.
+   EXAMPLE: to add the shell to Nt32 emulation, edit file Nt32Pkg.fdf and comment out the following:
+     #FILE APPLICATION = PCD(gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile) {
+     #    SECTION PE32 = EdkShellBinPkg/FullShell/Ia32/Shell_Full.efi
+     #  }
+
+4. Add this shell to the .fdf firmware list
+   Add the Shell.INF to the end of the list of DXE modules.
+   EXAMPLE: to add the shell to Nt32 emulation, edit file Nt32Pkg.fdf add the following at the end of the DXE modules:
+
+    INF  ShellPkg/Application/Shell/Shell.inf
+
+5. Build -p Nt32Pkg\Nt32Pkg.dsc
+
+============================================================================
+                          KNOWN LIMITATIONS
+============================================================================
+1. RM can delete current working directory via other map name.
+2. DrvCfg is not functional.
+3. ifConfig permanent settings are under investigation (may not function correctly)
+4. Shell documentation is in development and forthcoming.
+
+============================================================================
