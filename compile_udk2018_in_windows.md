@@ -54,3 +54,5 @@ build...
 path BaseTools\BinWrappers\WindowsLike;
 set PYTHON_HOME=c:\python27;
 ```
+
+> 原问题[网址](http://www.lab-z.com/udk2018coming/)
