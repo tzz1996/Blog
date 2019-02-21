@@ -60,3 +60,23 @@ sql>create database wordpress;
 - 将`/etc/ftpusers`中的`root`用户删除。
 - 重启vsftpd服务：`service vsfptd restart`
 - 本地登录已验证：`ftp localhost`
+
+### 7.安装SSL
+- 首先需要注册一个对应自己服务器ip地址的域名，如[freenom](https://my.freenom.com/clientarea.php)网站。
+- 将这个域名添加到一个DNS提供商网站上，例如[cloudflare](https://www.cloudflare.com/)网站。在这个过程中会生成两个新的域名，需要到以freenom为例的[更新nameservers界面](https://my.freenom.com/clientarea.php?action=domains)去将两个新生成的nameserver替换进去。全部步骤完成后在cloudflare上会显示正常。
+- 通过[certbot](https://certbot.eff.org/lets-encrypt/ubuntutrusty-apache)这里提供的步骤完成在服务器上安装ssl证书。其中需要注意的是，这个过程需要用到你所使用的DNS提供商的API key，以cloudflare为例的[获取API_key界面](https://dash.cloudflare.com/profile)这里获取，使用方法在[certbot提供的cloudflare插件安装文档](https://certbot-dns-cloudflare.readthedocs.io/en/stable/)中。
+> 需注意certbot只支持一些DNS提供商，并提供以下插件：
+> [certbot-dns-cloudflare](https://certbot-dns-cloudflare.readthedocs.io/en/stable/),
+> [certbot-dns-cloudxns](https://certbot-dns-cloudxns.readthedocs.io/en/stable/),
+> [certbot-dns-digitalocean](https://certbot-dns-digitalocean.readthedocs.io/en/stable/),
+> [certbot-dns-dnsimple](https://certbot-dns-dnsimple.readthedocs.io/en/stable/),
+> [certbot-dns-dnsmadeeasy](https://certbot-dns-dnsmadeeasy.readthedocs.io/en/stable/),
+> [certbot-dns-google](https://certbot-dns-google.readthedocs.io/en/stable/),
+> [certbot-dns-linode](https://certbot-dns-linode.readthedocs.io/en/stable/),
+> [certbot-dns-luadns](https://certbot-dns-luadns.readthedocs.io/en/stable/),
+> [certbot-dns-nsone](https://certbot-dns-nsone.readthedocs.io/en/stable/),
+> [certbot-dns-ovh](https://certbot-dns-ovh.readthedocs.io/en/stable/),
+> [certbot-dns-rfc2136](https://certbot-dns-rfc2136.readthedocs.io/en/stable/),
+> [certbot-dns-route53](https://certbot-dns-route53.readthedocs.io/en/stable/).
+
+- 到此，已完成在服务器上安装ssl证书，需要把他安装到wordpress中，用wordpress中的ssl安装插件即可。
