@@ -79,3 +79,59 @@ iptables -I INPUT -p tcp --dport 8388 -j ACCEPT
 ```
 ssserver -c /etc/shadowsocks.json -d restart
 ```
+
+## 配置SSR
+- shadowsocks-r[服务端](https://github.com/shadowsocksrr/shadowsocksr)
+- ssr windows[客户端](https://github.com/shadowsocksrr/shadowsocksr-csharp)
+
+### 1.安装组件
+```
+yum install git
+git clone https://github.com/shadowsocksr/shadowsocksr.git
+```
+
+### 2.使用方法
+- 进入ssr根目录运行初始化脚本：
+```
+cd ~/shadowsocksr
+bash initcfg.sh
+```
+- 写配置文件：
+```
+{
+    "server": "0.0.0.0",
+    "server_ipv6": "::",
+    "server_port": 8388,
+    "local_address": "127.0.0.1",
+    "local_port": 1080,
+
+    "password": "m",
+    "method": "aes-128-ctr",
+    "protocol": "auth_aes128_md5",
+    "protocol_param": "",
+    "obfs": "tls1.2_ticket_auth_compatible",
+    "obfs_param": "",
+    "speed_limit_per_con": 0,
+    "speed_limit_per_user": 0,
+
+    "additional_ports" : {}, // only works under multi-user mode
+    "additional_ports_only" : false, // only works under multi-user mode
+    "timeout": 120,
+    "udp_timeout": 60,
+    "dns_ipv6": false,
+    "connect_verbose_info": 0,
+    "redirect": "",
+    "fast_open": false
+}
+```
+> 配置文件位置：`~/shadowsocksr/user-config.json`
+
+- 进入ssr根目录中的shadowsocks目录，执行其他操作。
+- 启动服务前台运行：
+```
+python server.py
+```
+或使用脚本：
+```
+./run.sh
+```
