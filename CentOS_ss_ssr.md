@@ -15,13 +15,11 @@ yum install python-setuptools && easy_install pip
 
 ### 2.下载安装ss
 - 通过github下载并安装：
-
 ```
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 ```
 
 - 通过yum源下载并安装：
-
 ```
 pip install shadowsocks
 ```
@@ -47,13 +45,11 @@ pip install shadowsocks
 > 文件位置：`/etc/shadowsocks.json`
 
 - 前台运行
-
 ```
 ssserver -c /etc/shadowsocks.json
 ```
 
 - 后台运行
-
 ```
 ssserver -c /etc/shadowsocks.json -d start
 ssserver -c /etc/shadowsocks.json -d stop
@@ -62,13 +58,11 @@ ssserver -c /etc/shadowsocks.json -d stop
 ### 4.可能出现的问题
 #### (1)pip安装ss报错
 - 通过pip安装shadowsocks时可能出错：
- 
 ```
 _blocking_errnos = {errno.EAGAIN, errno.EWOULDBLOCK} pip
 ```
 
 - 这时需要手动从github获取pip并安装：
-
 ```
 wget  https://raw.githubusercontent.com/pypa/get-pip/master/2.6/get-pip.py
 python2.6 get-pip.py
@@ -78,7 +72,6 @@ python2.6 get-pip.py
 
 #### (2)服务器iptables阻止访问特定端口
 - 解决方法：打开对应端口的权限，并保存iptables设置
-
 ```
 iptables -I INPUT -p tcp --dport 8388 -j ACCEPT
 /etc/init.d/iptables save
