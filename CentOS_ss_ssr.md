@@ -152,6 +152,7 @@ tail -f /var/log/shadowsocksr.log
 /*或使用脚本*/
 ./tail.sh
 ```
+- 其中ssr服务器可以兼容ss客户端，只需要将配置文件中`"protocol"`字段设为`origin`,`"obfs"`字段设为`plain`，其他字段匹配即可。
 
 ### 3.可能出现的问题
 #### (1)服务器iptables阻止访问特定端口
