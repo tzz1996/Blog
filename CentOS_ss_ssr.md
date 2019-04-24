@@ -190,3 +190,9 @@ tail -f /var/log/shadowsocksr.log
 ### 3.可能出现的问题
 #### (1)服务器iptables阻止访问特定端口
 - 解决方法：参照ss。
+
+### 4.可用的BBR加速
+- BBR("Bottleneck Bandwidth and RTT")为google开发的针对linux内核tcp栈的阻塞控制算法。
+- BBR[github网址](https://github.com/google/bbr)。
+- BBR安装脚本[github网址](https://github.com/teddysun/across)。
+- 搬瓦工vps提供一些系统版本安装好BBR的服务器。
