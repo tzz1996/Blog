@@ -130,31 +130,26 @@ bash initcfg.sh
 - 启动服务前台运行：
 ```
 python server.py
-./run.sh /*或使用脚本*/
+/*或使用脚本*/
+./run.sh
 ```
 - 后台运行：
 ```
 python server.py -d start
 python server.py -d restart
-```
-或使用脚本：
-```
+/*或使用脚本*/
 ./logrun.sh
 ```
 - 停止运行：
 ```
 python server.py -d stop
-```
-或使用脚本：
-```
+/*或使用脚本*/
 ./stop.sh
 ```
 - 后台运行时查看日志：
 ```
 tail -f /var/log/shadowsocksr.log
-```
-或使用脚本：
-```
+/*或使用脚本*/
 ./tail.sh
 ```
 
