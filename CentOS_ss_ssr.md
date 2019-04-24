@@ -83,3 +83,8 @@ python2.6 get-pip.py
 iptables -I INPUT -p tcp --dport 8388 -j ACCEPT
 /etc/init.d/iptables save
 ```
+
+- 重启ss服务：
+```
+ssserver -c /etc/shadowsocks.json -d restart
+```
