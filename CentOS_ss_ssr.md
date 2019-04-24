@@ -60,7 +60,7 @@ ssserver -c /etc/shadowsocks.json -d stop
 ```
 
 ### 4.可能出现的问题
-##### (1)pip安装ss报错
+#### (1)pip安装ss报错
 - 通过pip安装shadowsocks时可能出错：
  
 ```
@@ -76,7 +76,7 @@ python2.6 get-pip.py
 
 > 原问题[网址](https://blog.csdn.net/li740207611/article/details/86609917)
 
-##### (2)服务器iptables阻止访问特定端口
+#### (2)服务器iptables阻止访问特定端口
 - 解决方法：打开对应端口的权限，并保存iptables设置
 
 ```
