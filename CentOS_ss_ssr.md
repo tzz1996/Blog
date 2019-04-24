@@ -130,10 +130,7 @@ bash initcfg.sh
 - 启动服务前台运行：
 ```
 python server.py
-```
-或使用脚本：
-```
-./run.sh
+./run.sh /*或使用脚本*/
 ```
 - 后台运行：
 ```
