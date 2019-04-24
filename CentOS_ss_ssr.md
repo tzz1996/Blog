@@ -133,11 +133,11 @@ bash initcfg.sh
     "local_address": "127.0.0.1",
     "local_port": 1080,
 	
-"port_password":{
-	"8388":"password1",
-	"8389":"password2",
-	"8390":"password3"	
-},
+    "port_password":{
+    	"8388":"password1",
+    	"8389":"password2",
+    	"8390":"password3"	
+    },
     //"password": "m",
     "method": "aes-128-ctr",
     "protocol": "auth_aes128_md5",
