@@ -87,7 +87,7 @@ ssserver -c /etc/shadowsocks.json -d restart
 ### 1.安装组件
 ```
 yum install git
-git clone https://github.com/shadowsocksr/shadowsocksr.git
+git clone https://github.com/shadowsocksrr/shadowsocksr.git
 ```
 
 ### 2.使用方法
