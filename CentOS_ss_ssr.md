@@ -126,7 +126,7 @@ bash initcfg.sh
 ```
 > 配置文件位置：`~/shadowsocksr/user-config.json`
 
-- 进入ssr根目录中的shadowsocks目录，执行其他操作。
+- 进入ssr根目录中的shadowsocks目录，执行其他操作,这些操作默认使用前面的配置文件。
 - 启动服务前台运行：
 ```
 python server.py
@@ -135,3 +135,32 @@ python server.py
 ```
 ./run.sh
 ```
+- 后台运行：
+```
+python server.py -d start
+python server.py -d restart
+```
+或使用脚本：
+```
+./logrun.sh
+```
+- 停止运行：
+```
+python server.py -d stop
+```
+或使用脚本：
+```
+./stop.sh
+```
+- 后台运行时查看日志：
+```
+tail -f /var/log/shadowsocksr.log
+```
+或使用脚本：
+```
+./tail.sh
+```
+
+### 3.可能出现的问题
+#### (1)服务器iptables阻止访问特定端口
+- 解决方法：参照ss。
