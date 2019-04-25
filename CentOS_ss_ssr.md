@@ -195,4 +195,5 @@ tail -f /var/log/shadowsocksr.log
 - BBR("Bottleneck Bandwidth and RTT")为google开发的针对linux内核tcp栈的阻塞控制算法。
 - BBR[github网址](https://github.com/google/bbr)。
 - BBR安装脚本[github网址](https://github.com/teddysun/across)。
+- Ubuntu，CentOS 6，CentOS 7的BBR安装[网址](https://www.hi-linux.com/posts/64279.html)。
 - 搬瓦工vps提供一些系统版本安装好BBR的服务器。
