@@ -209,9 +209,10 @@ tail -f /var/log/shadowsocksr.log
 - 脚本运行完重启发现开不了机的，打开 VPS 后台控制面板的 VNC, 开机卡在 grub 引导, 手动选择内核即可。
 
 ### 使用方法
+- [脚本内容](https://github.com/tzz1996/Blog/blob/master/bbr.sh)
 - 使用root用户登录，运行以下命令：
 ```
-wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget --no-check-certificate https://github.com/tzz1996/Blog/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 ```
 - 安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。
 - 重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令，显示为最新版本表示成功。
