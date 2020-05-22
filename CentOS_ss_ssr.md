@@ -223,17 +223,17 @@ uname -r
 ```
 sysctl net.ipv4.tcp_available_congestion_control
 ```
-> 返回值一般为：net.ipv4.tcp_available_congestion_control = bbr cubic reno
-> 或者为：net.ipv4.tcp_available_congestion_control = reno cubic bbr
+> 返回值一般为：`net.ipv4.tcp_available_congestion_control = bbr cubic reno`
+> 或者为：`net.ipv4.tcp_available_congestion_control = reno cubic bbr`
 ```
 sysctl net.ipv4.tcp_congestion_control
 ```
-> 返回值一般为：net.ipv4.tcp_congestion_control = bbr
+> 返回值一般为：`net.ipv4.tcp_congestion_control = bbr`
 ```
 sysctl net.core.default_qdisc
 ```
-> 返回值一般为：net.core.default_qdisc = fq
+> 返回值一般为：`net.core.default_qdisc = fq`
 ```
 lsmod | grep bbr
 ```
-> 返回值有 tcp_bbr 模块即说明 bbr 已启动。
+> 返回值有 `tcp_bbr` 模块即说明 bbr 已启动。
