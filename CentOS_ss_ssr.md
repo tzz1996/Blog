@@ -1,4 +1,4 @@
-# CentOS配置SS和SSR
+# CentOS配置SS和SSR和BBR
 - 环境：CentOS 6
 
 ## 配置SS
@@ -197,3 +197,42 @@ tail -f /var/log/shadowsocksr.log
 - BBR安装脚本[github网址](https://github.com/teddysun/across)。
 - Ubuntu，CentOS 6，CentOS 7的BBR安装[网址](https://www.hi-linux.com/posts/64279.html)。
 - 搬瓦工vps提供一些系统版本安装好BBR的服务器。
+
+## 配置BBR
+- 系统支持：CentOS 6+，Debian 7+，Ubuntu 12+
+- 虚拟技术：OpenVZ 以外的，比如 KVM、Xen、VMware 等
+- 内存要求：≥128M
+
+### 关于脚本
+- 本脚本已在Vultr上的VPS全部测试通过。
+- 当脚本检测到 VPS 的虚拟方式为 OpenVZ 时，会提示错误，并自动退出安装。
+- 脚本运行完重启发现开不了机的，打开 VPS 后台控制面板的 VNC, 开机卡在 grub 引导, 手动选择内核即可。
+
+### 使用方法
+- 使用root用户登录，运行以下命令：
+```
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+```
+- 安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。
+- 重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令，显示为最新版本表示成功。
+```
+uname -r
+```
+- 使用以下命令检查bbr安装情况：
+```
+sysctl net.ipv4.tcp_available_congestion_control
+```
+> 返回值一般为：net.ipv4.tcp_available_congestion_control = bbr cubic reno
+> 或者为：net.ipv4.tcp_available_congestion_control = reno cubic bbr
+```
+sysctl net.ipv4.tcp_congestion_control
+```
+> 返回值一般为：net.ipv4.tcp_congestion_control = bbr
+```
+sysctl net.core.default_qdisc
+```
+> 返回值一般为：net.core.default_qdisc = fq
+```
+lsmod | grep bbr
+```
+> 返回值有 tcp_bbr 模块即说明 bbr 已启动。
