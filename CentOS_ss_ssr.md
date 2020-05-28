@@ -258,11 +258,9 @@ tar zxvf speederv2_binaries.tar.gz
 ```
 ./speederv2_x86 -s -l0.0.0.0:4096 -r127.0.0.1:7777   -k"passwd"  -f2:4 --timeout 1 &
 ```
-> -f2:4表示对每2个原始数据发送4个冗余包。-f2:4 和-f 2:4都是可以的，空格可以省略。
-
-> 3倍流量，但是引入的额外延迟更小(<=2ms)，适用与游戏场景。
-
-> `ps -aux |grep 4096`可查看后台运行的udpspeeder进程信息。
+> -f2:4表示对每2个原始数据发送4个冗余包。-f2:4 和-f 2:4都是可以的，空格可以省略<br/>
+> 3倍流量，但是引入的额外延迟更小(<=2ms)，适用与游戏场景<br/>
+> `ps -aux |grep 4096`可查看后台运行的udpspeeder进程信息<br/>
 
 ### 客户端配置
 - 下载[udpspeeder客户端](https://github.com/wangyu-/UDPspeeder/releases)，并进入到客户端目录（windows），运行：
