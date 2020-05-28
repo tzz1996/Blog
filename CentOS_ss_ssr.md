@@ -237,3 +237,37 @@ sysctl net.core.default_qdisc
 lsmod | grep bbr
 ```
 > 返回值有 `tcp_bbr` 模块即说明 bbr 已启动。
+
+# SSTap+SSR+UDPspeeder
+- [SSTap](https://sourceforge.net/projects/sstap/)
+- [UDPspeeder](https://github.com/wangyu-/UDPspeeder)
+
+### 原理
+- 主要原理是通过发冗余数据来对抗网络的丢包，发送冗余数据的方式支持FEC(Forward Error Correction)和多倍发包，其中FEC算法是Reed-Solomon。
+- udpspeeder对ssr发出的udp包进行处理，此时ssr客户端被设置为只能收发udp包，再用sstap进行tcp和udp的合并。
+
+## 使用方法
+### 服务端配置
+- 下载udpspeeder并解压：
+```
+wget https://github.com/wangyu-/UDPspeeder/releases/download/20180522.0/speederv2_binaries.tar.gz
+tar zxvf speederv2_binaries.tar.gz
+```
+
+- 此时假设你服务器`ip`为`44.55.66.77`，有一个服务监听在`udp 7777`端口上，比如`ssr`，运行如下命令：
+```
+./speederv2_x86 -s -l0.0.0.0:4096 -r127.0.0.1:7777   -k"passwd"  -f2:4 --timeout 1 &
+```
+> -f2:4表示对每2个原始数据发送4个冗余包。-f2:4 和-f 2:4都是可以的，空格可以省略
+> `ps -aux |grep 4096`可查看后台运行的udpspeeder进程信息
+
+### 客户端配置
+- 下载[udpspeeder客户端](https://github.com/wangyu-/UDPspeeder/releases)，并进入到客户端目录（windows），运行：
+```
+speederv2.exe -c -l0.0.0.0:3333 -r44.55.66.77:4096 -k"passwd"  -f2:4 --timeout 1
+```
+> 现在在Windows上访问本机的3333即相当于访问VPS的7777端口，实现udp加速了。
+
+- 下载sstap，添加`socks5`代理，`ip`设为本地回环`127.0.0.1`，端口设置为ssr的本地端口（默认为1080），附加路由设置为`vps`的`ip`。
+- ssr客户端的服务端`ip`设置为`127.0.0.1`，端口设置为udpspeeder监听的`3333`，其他配置与ssr服务端相匹配，系统代理模式设置为直连，表示系统不通过ssr进行代理。
+- 此时便可通过sstap代理来达到降低延迟效果。
