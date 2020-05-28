@@ -242,7 +242,7 @@ lsmod | grep bbr
 - [SSTap](https://sourceforge.net/projects/sstap/)
 - [UDPspeeder](https://github.com/wangyu-/UDPspeeder)
 
-### 原理
+## 原理
 - 主要原理是通过发冗余数据来对抗网络的丢包，发送冗余数据的方式支持FEC(Forward Error Correction)和多倍发包，其中FEC算法是Reed-Solomon。
 - udpspeeder对ssr发出的udp包进行处理，此时ssr客户端被设置为只能收发udp包，再用sstap进行tcp和udp的合并。
 
