@@ -365,11 +365,12 @@ udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp 
 udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd"
 ```
 > 如果一切正常`client`端输出显示`client_ready`,`server`端也会有类似输出,显示`server_ready`
-- vps上运行kcptun服务端
+- vps上运行kcptun服务端，监听端口设置为udp2raw服务端的远程端口`4000`
 - 本地运行kcptun客户端：
 ```
 client_windows_amd64.exe --localaddr :8888 --remoteaddr 127.0.0.1:4000 --key 123456 --crypt aes --mode fast2 --mtu 1200 --sndwnd 512 --rcvwnd 512 --datashard 10 --parityshard 3 --dscp 0 --nocomp true --quiet false --tcp false
 ```
-> 其中`--remoteaddr 127.0.0.1:4000`为udp2raw客户端监听端口
+> 其中`--remoteaddr 127.0.0.1:4000`为udp2raw客户端监听端口<br/>
+> 并且`kcptun client`，`udp2raw client`，`kcptun server`， `udp2raw server`间的通信端口均设为`4000`
 - ssr客户端连接kcptun监听的`8888`端口
 - 此时完成了一条`ssr client`<->`kcptun client`<->`udp2raw client`<---->`udp2raw server`<->`kcptun server`<->`ssr server`的数据隧道
