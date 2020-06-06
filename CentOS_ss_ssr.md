@@ -272,3 +272,104 @@ speederv2.exe -c -l0.0.0.0:3333 -r44.55.66.77:4096 -k"passwd"  -f2:4 --timeout 1
 - 下载sstap，添加`socks5`代理，`ip`设为本地回环`127.0.0.1`，端口设置为ssr的本地端口（默认为1080），附加路由设置为`vps`的`ip`。
 - ssr客户端的服务端`ip`设置为`127.0.0.1`，端口设置为udpspeeder监听的`3333`，其他配置与ssr服务端相匹配，系统代理模式设置为直连，表示系统不通过ssr进行代理。
 - 此时便可通过sstap代理来达到降低延迟效果。
+
+
+# SSR+kcptun+udp2raw
+- [kcptun](https://github.com/xtaci/kcptun)
+- [udp2raw](https://github.com/wangyu-/udp2raw-tunnel)
+- udp2raw在windows下运行需要依赖[winpcap库](https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe)
+
+## kcptun配置
+### 服务端配置
+- 通过[kcptun脚本](https://github.com/kuoruan/shell-scripts/blob/master/kcptun/kcptun.sh)配置服务端
+> [其他配置网址](https://ssr.tools/588)
+- 下载并运行`kcptun.sh`:
+```
+wget --no-check-certificate https://github.com/tzz1996/Blog/raw/master/kcptun.sh
+chmod +x ./kcptun.sh
+./kcptun.sh
+```
+- 配置文件`config.json`如下：
+```
+{
+    "listen": ":4000",
+    "target": "127.0.0.1:8388",
+    "key": "123456",
+    "crypt": "aes",
+    "mode": "fast2",
+    "mtu": 1200,
+    "sndwnd": 512,
+    "rcvwnd": 512,
+    "datashard": 10,
+    "parityshard": 3,
+    "dscp": 0,
+    "nocomp": true,
+    "quiet": false,
+    "tcp": false,
+    "pprof": false
+}
+```
+> 其中`"target"`为ssr服务端监听端口，`"listen"`为kcptun服务端监听端口，其他参数请参考官方项目文档
+
+#### kcptun常用功能及命令：
+- KCPTUN安装目录：`/usr/local/kcptun`
+- KCPTUN的参数配置文件：`/usr/local/kcptun/server-config.json`
+- 启动：`supervisorctl start kcptun`
+- 停止：`supervisorctl stop kcptun`
+- 重启：`supervisorctl restart kcptun`
+- 状态：`supervisorctl status kcptun`
+- 卸载：`./kcptun.sh uninstall`
+
+### 客户端配置
+- 通过[下载地址](https://github.com/xtaci/kcptun/releases)下载对应系统和处理器架构的客户端软件
+- windows本地运行：
+```
+client_windows_amd64.exe --localaddr :8888 --remoteaddr 66.42.80.107:29900 --key 123456 --crypt aes --mode fast2 --mtu 1200 --sndwnd 512 --rcvwnd 512 --datashard 10 --parityshard 3 --dscp 0 --nocomp true --quiet false --tcp false
+```
+> 其中的参数配置和服务端参数匹配<br/>
+> `--localaddr :8888`为kcptun客户端为ssr客户端提供的服务端口，`--remoteaddr 66.42.80.107:29900`为服务端ip和kcptun服务端监听端口
+
+- ssr中服务器ip改为`127.0.0.1`，服务器端口改为`8888`，其余参数与ssr服务端参数匹配
+- 至此形成一条`ssr client`<->`kcptun client`<---->`kcptun server`<->`ssr server`的数据隧道
+
+## udp2raw配置
+### 服务端配置
+- 下载udp2raw并解压：
+```
+wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz
+tar zxvf udp2raw_binaries.tar.gz
+```
+- 运行udp2raw服务端：
+```
+./udp2raw_x86 -s -l0.0.0.0:8855 -r 127.0.0.1:4000 -k "passwd" --raw-mode faketcp -a &
+```
+> 其中`4000`为kcptun服务端监听端口，`8855`为udp2raw服务端监听端口
+
+### 客户端配置
+- windows下安装winpcap库
+- 下载作者提供的windows版[udp2raw client](https://github.com/wangyu-/udp2raw-multiplatform)
+- 本地运行：
+```
+udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd"
+```
+> 其中`45.66.77.88:8855`为`vps ip`和udp2raw服务端监听端口
+
+## 数据隧道配置
+- vps上成功运行ssr
+- vps上运行udp2raw服务端：
+```
+./udp2raw_x86 -s -l0.0.0.0:8855 -r 127.0.0.1:4000 -k "passwd" --raw-mode faketcp -a &
+```
+- 本地运行udp2raw客户端：
+```
+udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd"
+```
+> 如果一切正常`client`端输出显示`client_ready`,`server`端也会有类似输出,显示`server_ready`
+- vps上运行kcptun服务端
+- 本地运行kcptun客户端：
+```
+client_windows_amd64.exe --localaddr :8888 --remoteaddr 127.0.0.1:4000 --key 123456 --crypt aes --mode fast2 --mtu 1200 --sndwnd 512 --rcvwnd 512 --datashard 10 --parityshard 3 --dscp 0 --nocomp true --quiet false --tcp false
+```
+> 其中`--remoteaddr 127.0.0.1:4000`为udp2raw客户端监听端口
+- ssr客户端连接kcptun监听的`8888`端口
+- 此时完成了一条`ssr client`<->`kcptun client`<->`udp2raw client`<---->`udp2raw server`<->`kcptun server`<->`ssr server`的数据隧道
