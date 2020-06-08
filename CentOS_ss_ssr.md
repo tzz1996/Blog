@@ -348,6 +348,11 @@ tar zxvf udp2raw_binaries.tar.gz
 ### 客户端配置
 - windows下安装winpcap库
 - 下载作者提供的windows版[udp2raw client](https://github.com/wangyu-/udp2raw-multiplatform)
+- 通过udp2raw客户端提供的自动生成windwos开启端口代码功能打开对应权限：
+```
+udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd" -g
+```
+> `-g`选项将生成windows下的网络命令，手动运行即可
 - 本地运行：
 ```
 udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd"
