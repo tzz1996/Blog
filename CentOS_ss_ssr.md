@@ -353,6 +353,11 @@ tar zxvf udp2raw_binaries.tar.gz
 udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd" -g
 ```
 > `-g`选项将生成windows下的网络命令，手动运行即可
+- 以下为windows生成的网络设置命令：
+```
+netsh advfirewall firewall add rule name=udp2raw protocol=TCP dir=in remoteip=66.42.80.107 remoteport=8855 action=block
+netsh advfirewall firewall add rule name=udp2raw protocol=TCP dir=out remoteip=66.42.80.107 remoteport=8855 action=block
+```
 - 本地运行：
 ```
 udp2raw_mp_nolibnet.exe -c -r45.66.77.88:8855 -l0.0.0.0:4000 --raw-mode faketcp -k"passwd"
