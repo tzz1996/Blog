@@ -20,10 +20,8 @@
 ```
 ...\OpenDDS-3.16> configue
 ```
-> `configure.cmd`脚本调用名为`configure`的`Perl`脚本，用于生成`DDS_TAOv2.sln`文件和配置环境
-
-> `configure`脚本还会创建名为`setenv.cmd`的windows脚本，用于为当前`vs2017 cl`配置编译所需的所有环境变量
-
+> `configure.cmd`脚本调用名为`configure`的`Perl`脚本，用于生成`DDS_TAOv2.sln`文件和配置环境  
+> `configure`脚本还会创建名为`setenv.cmd`的windows脚本，用于为当前`vs2017 cl`配置编译所需的所有环境变量  
 > `setenv.cmd`脚本是为`ACE+TAO`和`OpenDDS`配置环境变量，在编译他前必须配置完成，或通过`windows`系统手动添加
 
 - 在`vs2017 cl`中`OpenDDS`根目录运行：
