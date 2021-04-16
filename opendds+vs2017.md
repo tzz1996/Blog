@@ -28,12 +28,9 @@
 ```
 ...\OpenDDS-3.16> setenv
 ```
-> `setenv.cmd`将完成的重要环境变量配置有：
-
-> ACE_ROOT=...\OpenDDS-3.16\ACE_wrappers
-
-> TAO_ROOT=...\OpenDDS-3.16\ACE_wrappers\TAO
-
+> `setenv.cmd`将完成的重要环境变量配置有：  
+> ACE_ROOT=...\OpenDDS-3.16\ACE_wrappers  
+> TAO_ROOT=...\OpenDDS-3.16\ACE_wrappers\TAO  
 > DDS_ROOT=...\OpenDDS-3.16
 
 ### 3.编译ACE+TAO项目
@@ -45,8 +42,7 @@
 ...\OpenDDS-3.16\ACE_wrappers> devenv ACE_vs2017.sln
 ```
 - 在`vs2017`中右键项目文件，重新生成解决方案，进行编译
-> 本次测试的`OpenDDS`版本为`3.16`，所包含的`vs`解决方案版本只有`vs2017`和`vs2019`
-
+> 本次测试的`OpenDDS`版本为`3.16`，所包含的`vs`解决方案版本只有`vs2017`和`vs2019`  
 > 从`vs2017 cl`中打开解决方案的目的为使解决方案可以使用`configure`和`setenv`脚本设置的环境
 
 #### 3.2.编译TAO
@@ -69,8 +65,7 @@
 ```
 ...\OpenDDS-3.16\examples\DCPS\Messenger_Imr> perl %MPC_ROOT%\mwc.pl -type vs2017
 ```
-> 其中`%MPC_ROOT%`为运行`configure`脚本时为`vs2017 cl`设置的环境变量
-
+> 其中`%MPC_ROOT%`为运行`configure`脚本时为`vs2017 cl`设置的环境变量  
 > 绝对路径为`...\OpenDDS-3.16\ACE_wrappers\MPC\mwc.pl`
 - 运行完成后，将在`...\OpenDDS-3.16\examples\DCPS\Messenger_Imr`路径下生成`vs2017`解决方案文件
 
