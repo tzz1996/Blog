@@ -172,15 +172,16 @@ bash initcfg.sh
     "local_port": 1080,
 	
     "port_password":{
-    	"8388":"password1",
-    	"8389":"password2",
-    	"8390":"password3"	
+    	"8388":"123456",
+    	"8389":"123456",
+    	"8390":"123456",
+        "8391":"123456"	
     },
     //"password": "m",
     "method": "aes-128-ctr",
-    "protocol": "auth_aes128_md5",
+    "protocol": "auth_sha1_v4",
     "protocol_param": "",
-    "obfs": "tls1.2_ticket_auth_compatible",
+    "obfs": "tls1.2_ticket_auth",
     "obfs_param": "",
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
