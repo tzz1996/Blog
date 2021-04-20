@@ -77,10 +77,13 @@ python2.6 get-pip.py
 > `python2.6`命令需要根据具体系统`/usr/bin`目录下的python可执行文件名来确定命令和对应的python版本
 
 #### (2)服务器iptables阻止访问特定端口
-- 解决方法：打开对应端口的权限，并保存iptables设置
+- 解决方法：打开对应端口的tcp/udp访问权限，并保存iptables设置
 ```
 iptables -I INPUT -p tcp --dport 8388 -j ACCEPT
+iptables -I INPUT -p udp --dport 8388 -j ACCEPT
 /etc/init.d/iptables save
+/* 或者使用service */
+service iptables save
 ```
 - 重启ss服务：
 ```
@@ -385,9 +388,13 @@ tar zxvf udp2raw_binaries.tar.gz
 > 其中`4000`为kcptun服务端监听端口，`8855`为udp2raw服务端监听端口
 
 #### 维护udp2raw服务端方法
-- 通过端口检测命令查找`udp2raw`进程`pid`：
+- 通过`list open file`命令查找`udp2raw`进程`pid`：
 ```
 lsof | grep 8855
+```
+- 或通过netstat命令查找对应端口的进程`pid`：
+```
+netstat -ap | grep 8855
 ```
 - 通过查看进程命令确认此端口所运行的shell命令：
 ```
