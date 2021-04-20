@@ -108,7 +108,7 @@ systemctl enable iptables
 ```
 systemctl start iptables
 ```
-- 随后执行`service iptables save`便可保存iptables策略
+- 随后执行`service iptables save`便可保存iptables策略，之后重启ssr即可解决端口被iptables阻塞问题
 - 重启iptables服务：
 ```
 service iptables restart
@@ -383,6 +383,18 @@ tar zxvf udp2raw_binaries.tar.gz
 ./udp2raw_x86 -s -l0.0.0.0:8855 -r 127.0.0.1:4000 -k "passwd" --raw-mode faketcp -a &
 ```
 > 其中`4000`为kcptun服务端监听端口，`8855`为udp2raw服务端监听端口
+
+#### 维护udp2raw服务端方法
+- 通过端口检测命令查找`udp2raw`进程`pid`：
+```
+lsof | grep 8855
+```
+- 通过查看进程命令确认此端口所运行的shell命令：
+```
+ps -ef | grep 92514
+```
+> `92514`为对应的udp2raw进程`pid`
+- 通过`kill 92514`来结束udp2raw进程，并重新运行
 
 ### 客户端配置
 - windows下安装winpcap库
