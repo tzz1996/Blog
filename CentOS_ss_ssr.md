@@ -12,6 +12,11 @@ yum update
 yum install vim
 yum install python-setuptools && easy_install pip
 ```
+> CentOS 7和CentOS 8的yum源可能不包含python-setuptools包，或提供python2或python3的更高版本  
+> `CentOS 7/8`可通过`yum install python2/python3`来安装python库，和`yum install python2-setuptools`  
+> 但`CentOS 7/8`不能运行对应的`easy_install pip`命令  
+> 需要手动通过`wget https://bootstrap.pypa.io/pip/2.7/get-pip.py`来下载对应版本的`get-pip.py`文件  
+> 然后通过`python/python2/python3 get-pip.py`命令来安装pip
 
 ### 2.下载安装ss
 - 通过github下载并安装：
@@ -67,7 +72,9 @@ wget  https://raw.githubusercontent.com/pypa/get-pip/master/2.6/get-pip.py
 python2.6 get-pip.py
 ```
 
-> 原问题[网址](https://blog.csdn.net/li740207611/article/details/86609917)
+> 原问题[网址](https://blog.csdn.net/li740207611/article/details/86609917)  
+> 现网址已更新为`https://bootstrap.pypa.io/pip/2.6/get-pip.py`，其中`2.6`更换为对应版本
+> `python2.6`命令需要根据具体系统`/usr/bin`目录下的python可执行文件名来确定命令和对应的python版本
 
 #### (2)服务器iptables阻止访问特定端口
 - 解决方法：打开对应端口的权限，并保存iptables设置
@@ -289,6 +296,10 @@ wget --no-check-certificate https://github.com/tzz1996/Blog/raw/master/kcptun.sh
 chmod +x ./kcptun.sh
 ./kcptun.sh
 ```
+> 由于`kcptun.sh`文件中写的是通过`python`命令来调用python库，但`CentOS 7/8`中对应的python命令为`python2/python3`  
+> 需要修改`/usr/bin`目录下`python2/python3`的文件名为`python`即可，因为此版本`kcptun.sh`支持python2.6版本及以上  
+> 需注意：修改`python`命令后需要重新运行`python get-pip.py`来重新编译连接pip命令，否则pip命令无法正常执行
+
 - 配置文件`config.json`如下：
 ```
 {
