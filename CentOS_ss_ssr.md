@@ -73,7 +73,7 @@ python2.6 get-pip.py
 ```
 
 > 原问题[网址](https://blog.csdn.net/li740207611/article/details/86609917)  
-> 现网址已更新为`https://bootstrap.pypa.io/pip/2.6/get-pip.py`，其中`2.6`更换为对应版本
+> 现网址已更新为`https://bootstrap.pypa.io/pip/2.6/get-pip.py`，其中`2.6`更换为对应版本  
 > `python2.6`命令需要根据具体系统`/usr/bin`目录下的python可执行文件名来确定命令和对应的python版本
 
 #### (2)服务器iptables阻止访问特定端口
