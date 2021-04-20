@@ -87,6 +87,34 @@ iptables -I INPUT -p tcp --dport 8388 -j ACCEPT
 ssserver -c /etc/shadowsocks.json -d restart
 ```
 
+#### (2).1 CentOS 7/8没有service iptables save命令问题
+- 对应情况：`service iptables save`出现报错：
+```
+The service command supports only basic LSB actions (start, stop, restart, try-restart, reload, force-reload, status). For other actions, please try to use systemctl.
+```
+- 解决方法：关闭防火墙
+```
+systemctl stop firewalld
+```
+- 通过yum源安装iptables服务：
+```
+yum install iptables-services
+```
+- 设置iptables为使能：
+```
+systemctl enable iptables
+```
+- 打开iptables：
+```
+systemctl start iptables
+```
+- 随后执行`service iptables save`便可保存iptables策略
+- 重启iptables服务：
+```
+service iptables restart
+```
+> 配置完成后会生成`/etc/syscofig/`目录下的`iptables`可执行文件
+
 ## 配置SSR
 - shadowsocks-r[服务端](https://github.com/shadowsocksrr/shadowsocksr)
 - ssr windows[客户端](https://github.com/shadowsocksrr/shadowsocksr-csharp)
