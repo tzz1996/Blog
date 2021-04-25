@@ -72,6 +72,12 @@ mysql>flush privileges;
 
 - 可将 '磁盘:/文件名/.../mysql-5.6.30-win64/bin' 添加到系统环境变量'Path'中，即可在任意路径下登陆mysql。
 
+- 若先后安装了两个版本的mysql，可通过`--remove`选项先卸载之前版本，再通过`--install`再次安装：
+```
+mysqld --remove
+mysqld --install
+```
+
 **至此，windows下mysql-server配置完成.**
     
 
