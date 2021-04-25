@@ -1,5 +1,7 @@
 # Windows下配置mysql-server-5.6
-- 下载[mysql-server](http://dev.mysql.com/downloads/mysql/5.6.html#downloads)
+- 下载[mysql-server x64](http://dev.mysql.com/downloads/mysql/5.6.html#downloads)
+- [MySQL Community Server 5.7.34 Windows(x86,32bit)](https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.34-win32.zip)
+> 需注意，当mysql和其他如qt或dds库共同集成使用时，需要保证VS目标处理器架构相同，这里一般为x64或win32
 
 ## **安装步骤:**
 
