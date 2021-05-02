@@ -1,6 +1,6 @@
 # Blog
 - This repository include the installation process.
-And some notes.test1
+And some notes.test2
 
 ## 目录
 - [CentOS配置SS/SSR](https://github.com/tzz1996/Blog/blob/master/CentOS_ss_ssr.md)
